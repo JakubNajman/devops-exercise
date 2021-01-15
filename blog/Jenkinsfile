@@ -34,6 +34,8 @@ node{
             export IVER=${IVER}
             docker-compose build
             docker-compose push blog
+            export IVER='latest'
+            docker-compose push blog
         """
         sh 'echo App builded.'
     }
