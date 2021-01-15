@@ -1,70 +1,32 @@
 node{
-    def IVER = sh (script: "git rev-parse --short HEAD", returnStdout: true)
+    // def IVER = sh (script: "git rev-parse --short HEAD", returnStdout: true)
     def DATABASE_HOST='postgresql-service.default.svc.cluster.local'
     def DATABASE_NAME='blog_backend'
     def DATABASE_PASSWORD='blog_backend'
     def DATABASE_USERNAME='blog_backend'
-    // def dbenv = new ConfigSlurper().parse("")
-    // environment {
-    //     DATABASE_HOST=credentials('postgresql-service.default.svc.cluster.local')
-    //     DATABASE_NAME=credentials('blog_backend')
-    //     DATABASE_PASSWORD=credentials('blog_backend')
-    //     DATABASE_USERNAME=credentials('blog_backend')
-    // }
-    // def settingEnv(){
-    //     sh """
-    //         export IVER=${IVER}
-    //         export DATABASE_HOST=${DATABASE_HOST}
-    //         export DATABASE_NAME=${DATABASE_NAME}
-    //         export DATABASE_PASSWORD=${DATABASE_PASSWORD}
-    //         export DATABASE_USERNAME=${DATABASE_USERNAME}
-    //     """
-    // }
+
     stage('Clone repository'){
         checkout scm
         sh 'echo Repository cloned'
+        sh 'git status'
     }
     stage('Building app'){
-        //app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
-        // uzywac docker compose do pusha i pulla
-                        // envsubst < docker-compose.yml > docker-composeC.ym
-        //uzyc directory jenkins step
         sh """
             cd blog
-            export IVER=${IVER}
+            export IVER="latest"
             docker-compose build
             docker-compose push blog
         """
         sh 'echo App builded.'
     }
-    // stage('Pushing to local registry'){
-    //     //docker.withRegistry('http://localhost:55009/') {
-    //     //    Date
-    //     //    app.push("latest")
-    //     //    nie uzywac taga latest (tagow statycznych)
-    //     // sh 'docker tag blog_app localhost:55009/blog_app:latest'
-    //     // sh 'docker tag blog_app localhost:5000/blog_app:$(git rev-parse --short HEAD)'
-    //     // sh 'docker push localhost:55009/blog_app:latest'
-    //     sh 'cd blog && export IVER=$(git rev-parse --short HEAD) && envsubst
-    // < docker-composeC.yml > docker-compose.yml && docker-compose push blog'
-    // }
-    // stage('Pulling on Minikube Docker.'){
-    //     sh 'minikube ssh'
-    //     sh 'doker pull jakubnajman/'
-    // }
     stage('Test image'){
         sh 'echo Test passed.'
     }
     stage('Deploying on Kubernetes'){
         sh 'eval $(minikube docker-env)'
-        // sh "sed -i 's/latest/$(git rev-parse --short HEAD)/' kube/blogKube.yaml"
-        // sh 'export IVER=$(git rev-parse --short HEAD)'
-        // sh 'yum install gettext'
-        // sh 'docker pull localhost:5000/blog_app:$(git rev-parse --short HEAD)'
-        // envsubst < blogKube.yaml > blog_changed.yaml
         sh """
             cd blog/kube
-            export IVER=${IVER}
+            export IVER="latest"
             export DATABASE_HOST=${DATABASE_HOST}
             export DATABASE_NAME=${DATABASE_NAME}
             export DATABASE_PASSWORD=${DATABASE_PASSWORD}
@@ -73,11 +35,6 @@ node{
             kubectl apply -f blog_changed.yaml
         """
         sh 'cd blog/kube && kubectl apply -f addit/'
-        // sh 'cd blog && kubectl apply -f kube/'
         sh 'echo Deployments and services aplied.'
     }
-    // stage('Starting services'){
-    //     sh 'minikube service postgresql-service &'
-    //     sh 'minikube service blog-service &'
-    // }
 }
