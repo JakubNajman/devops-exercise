@@ -27,7 +27,8 @@ node{
     stage('Building app'){
         //app = docker.build("jakubnajman/blog_app","-f blog/Dockerfile .")
         // uzywac docker compose do pusha i pulla
-                        // envsubst < docker-compose.yml > docker-composeC.yml
+                        // envsubst < docker-compose.yml > docker-composeC.ym
+        //uzyc directory jenkins step
         sh """
             cd blog
             export IVER=${IVER}
@@ -60,7 +61,7 @@ node{
         // sh 'export IVER=$(git rev-parse --short HEAD)'
         // sh 'yum install gettext'
         // sh 'docker pull localhost:5000/blog_app:$(git rev-parse --short HEAD)'
-                       // envsubst < blogKube.yaml > blog_changed.yaml
+        // envsubst < blogKube.yaml > blog_changed.yaml
         sh """
             cd blog/kube
             export IVER=${IVER}
