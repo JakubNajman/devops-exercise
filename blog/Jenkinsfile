@@ -1,5 +1,5 @@
 node{
-    // def IVER = sh (script: "git rev-parse --short HEAD", returnStdout: true)
+    //def IVER = sh (script: "git rev-parse --short HEAD", returnStdout: true)
     def DATABASE_HOST='postgresql-service.default.svc.cluster.local'
     def DATABASE_NAME='blog_backend'
     def DATABASE_PASSWORD='blog_backend'

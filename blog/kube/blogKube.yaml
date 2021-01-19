@@ -28,15 +28,15 @@ spec:
     spec:
       containers:
       - name: blog
-        image: jakubnajman/blog_app:$IVER
+        image: eu.gcr.io/yndblog/blog_app:latest
         env:
         - name: DATABASE_PASSWORD
-          value: $DATABASE_PASSWORD
+          value: "12345"
         - name: DATABASE_USERNAME
-          value: $DATABASE_USERNAME
+          value: "blog_backend"
         - name: DATABASE_NAME
-          value: $DATABASE_NAME
+          value: "postgres-db"
         - name: DATABASE_HOST
-          value: $DATABASE_HOST
+          value: "35.228.194.112"
         ports:
           - containerPort: 3000

@@ -1,0 +1,56 @@
+{
+  "version": 4,
+  "terraform_version": "0.14.4",
+  "serial": 55,
+  "lineage": "9717ed53-7c49-a85c-18ad-558b4ba7eabe",
+  "outputs": {},
+  "resources": [
+    {
+      "module": "module.db",
+      "mode": "managed",
+      "type": "google_sql_database",
+      "name": "postgres-db",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "charset": "UTF8",
+            "collation": "en_US.UTF8",
+            "id": "projects/yndblog/instances/postgres-db-instance-eb012f14/databases/postgres-db",
+            "instance": "postgres-db-instance-eb012f14",
+            "name": "postgres-db",
+            "project": "yndblog",
+            "self_link": "https://sqladmin.googleapis.com/sql/v1beta4/projects/yndblog/instances/postgres-db-instance-eb012f14/databases/postgres-db",
+            "timeouts": null
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "module": "module.db",
+      "mode": "managed",
+      "type": "google_sql_user",
+      "name": "postgresql_user",
+      "provider": "provider[\"registry.terraform.io/hashicorp/google\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "deletion_policy": null,
+            "host": "",
+            "id": "blog_backend//postgres-db-instance-eb012f14",
+            "instance": "postgres-db-instance-eb012f14",
+            "name": "blog_backend",
+            "password": "1a2955cbfb4b92de",
+            "project": "yndblog",
+            "timeouts": null,
+            "type": ""
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    }
+  ]
+}
