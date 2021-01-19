@@ -8,11 +8,13 @@ resource "google_sql_database_instance" "db" {
         tier = "db-f1-micro"
 
         ip_configuration {
-        ipv4_enabled = "true"
-        authorized_networks {
-            value = "0.0.0.0/0"
-            }
+        ipv4_enabled = false
+        # authorized_networks {
+        #     value = "0.0.0.0/0"
+        #     }
+        private_network = var.network
         }
+
     }
 
 }

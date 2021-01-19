@@ -12,8 +12,10 @@ module "container" {
 
 module "db" {
   source = "./modules/db"
+  network = module.gcn.network
 }
 
-# module "gcn" {
-#   source = "./modules/gcn"
-# }
+module "gcn" {
+  source = "./modules/gcn"
+}
+

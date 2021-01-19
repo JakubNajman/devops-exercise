@@ -37,6 +37,6 @@ spec:
         - name: DATABASE_NAME
           value: "postgres-db"
         - name: DATABASE_HOST
-          value: "35.228.194.112"
+          value: "10.169.160.5"
         ports:
           - containerPort: 3000

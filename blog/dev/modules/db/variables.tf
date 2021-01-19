@@ -6,3 +6,7 @@ variable "region" {
 variable proj {
     default = "yndblog"
 }
+
+variable network {
+    type = string
+}

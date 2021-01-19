@@ -42,3 +42,5 @@ yarn-debug.log*
 
 yndblog1.json
 yndcred.json
+terraform.*
+.terraform.*
