@@ -26,7 +26,7 @@ resource "random_id" "db_name_suffix" {
 resource "google_sql_database" "postgres-db" {
     name = "postgres-db"
     project = var.proj
-    instance = "${google_sql_database_instance.db.name}"
+    instance = google_sql_database_instance.db.name
 }
 
 resource "random_id" "user_password" {
@@ -36,6 +36,6 @@ resource "random_id" "user_password" {
 resource "google_sql_user" "postgresql_user" {
     name = "blog_backend"
     project = var.proj
-    instance = "${google_sql_database_instance.db.name}"
-    password = "${random_id.user_password.hex}"
+    instance = google_sql_database_instance.db.name
+    password = random_id.user_password.hex
 }

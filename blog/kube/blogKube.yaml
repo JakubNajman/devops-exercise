@@ -9,7 +9,7 @@ spec:
   - protocol: TCP
     port: 3000
     targetPort: 3000
-  type: NodePort
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -31,12 +31,24 @@ spec:
         image: eu.gcr.io/yndblog/blog_app:latest
         env:
         - name: DATABASE_PASSWORD
-          value: "12345"
+          valueFrom: 
+            secretKeyRef:
+              name: dbsecret
+              key: DATABASE_PASSWORD
         - name: DATABASE_USERNAME
-          value: "blog_backend"
+          valueFrom: 
+            secretKeyRef:
+              name: dbsecret
+              key: DATABASE_USERNAME
         - name: DATABASE_NAME
-          value: "postgres-db"
+          valueFrom: 
+            secretKeyRef:
+              name: dbsecret
+              key: DATABASE_NAME
         - name: DATABASE_HOST
-          value: "10.169.160.5"
+          valueFrom: 
+            secretKeyRef:
+              name: dbsecret
+              key: DATABASE_HOST
         ports:
           - containerPort: 3000

@@ -6,6 +6,14 @@ provider "google" {
   zone = var.zone
 }
 
+provider "google-beta" {
+  credentials = file("yndcred.json")
+
+  project = var.proj
+  region = var.region
+  zone = var.zone
+}
+
 module "container" {
   source = "./modules/container"
 }

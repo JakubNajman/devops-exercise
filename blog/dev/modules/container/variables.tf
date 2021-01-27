@@ -12,7 +12,7 @@ variable "zone" {
 }
 
 variable "zones" {
-    default = ["europe-north1-a", "europe-north1-b"]
+    default = ["europe-north1-a", "europe-north1-c"]
 }
 
 variable "cluster" {

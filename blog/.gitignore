@@ -44,3 +44,4 @@ yndblog1.json
 yndcred.json
 terraform.*
 .terraform.*
+dbSec.yaml

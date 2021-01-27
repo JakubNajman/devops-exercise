@@ -15,6 +15,14 @@ resource "google_container_cluster" "primary" {
     description = "Glowny kontener naszej aplikacji."
     remove_default_node_pool = true
     initial_node_count =1
+
+    network    = "vpc-network"
+    subnetwork = "vpc-network"
+
+    ip_allocation_policy {
+        cluster_ipv4_cidr_block  = "/16"
+        services_ipv4_cidr_block = "/22"
+  }
 }
 
 resource "google_container_node_pool" "primary_preemptible_node" {
